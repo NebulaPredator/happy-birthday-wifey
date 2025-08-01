@@ -202,6 +202,5 @@ document.addEventListener('DOMContentLoaded', () => {
         scale: 0.9,
         duration: 1.8,
         ease: 'elastic.out(1, 0.5)'
-    }, '-=1.0')
-    .to('.container', { rotation: 360, duration: 20, ease: 'none', repeat: -1 }, '-=1.0'); // Subtle continuous rotation
+    }, '-=1.0');
 });
