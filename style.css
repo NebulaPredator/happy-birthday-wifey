@@ -26,7 +26,7 @@ body {
     border-radius: 32px;
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
     text-align: center;
-    transition: transform 0.6s ease-out; /* Slightly longer transition */
+    transition: transform 0.6s ease-out;
     backdrop-filter: blur(10px);
 }
 
@@ -41,14 +41,14 @@ h1 {
     background-clip: text;
     color: transparent;
     margin-bottom: 24px;
-    animation: pulse 2.8s infinite ease-out; /* Smoother pulse */
+    animation: pulse 2.8s infinite ease-out;
 }
 
-h2 {
+.edit-text {
     font-size: 2.25rem;
     color: #FFFACD;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    margin-bottom: 32px;
+    margin-bottom: 16px;
 }
 
 .birthdate {
@@ -76,7 +76,7 @@ button#messageToggle, button#launchButton {
     font-size: 1.25rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.4s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out; /* Smoother transitions */
+    transition: background 0.4s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out;
 }
 
 button#messageToggle:hover, button#launchButton:hover {
@@ -100,7 +100,7 @@ button#messageToggle:focus, button#launchButton:focus {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
-    transition: opacity 0.9s ease-out, max-height 0.9s ease-out, transform 0.9s ease-out; /* Smoother transitions */
+    transition: opacity 0.9s ease-out, max-height 0.9s ease-out, transform 0.9s ease-out;
 }
 
 .hidden-message:not(.hidden) {
@@ -131,7 +131,7 @@ button#messageToggle:focus, button#launchButton:focus {
 #launchMessage {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out; /* Smoother transition */
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
 }
 
 #launchMessage:not(.hidden) {
@@ -149,7 +149,7 @@ button#messageToggle:focus, button#launchButton:focus {
     border-radius: 50%;
     border: none;
     cursor: pointer;
-    transition: background 0.4s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out; /* Smoother transitions */
+    transition: background 0.4s ease-out, transform 0.3s ease-out, box-shadow 0.4s ease-out;
 }
 
 .music-control:hover {
@@ -168,6 +168,124 @@ button#messageToggle:focus, button#launchButton:focus {
     width: 100%;
     height: 100%;
     z-index: 0;
+}
+
+.video-section {
+    position: relative;
+}
+
+.video-player {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-player video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-player .controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 12px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
+}
+
+.video-player:hover .controls {
+    opacity: 1;
+}
+
+.video-player button {
+    background: none;
+    border: none;
+    color: #FFFACD;
+    font-size: 1.2rem;
+    padding: 4px 8px;
+    cursor: pointer;
+    transition: color 0.3s ease-out, transform 0.2s ease-out;
+}
+
+.video-player button:hover {
+    color: #FFD700;
+    transform: scale(1.1);
+}
+
+.video-player input[type="range"] {
+    -webkit-appearance: none;
+    height: 4px;
+    background: linear-gradient(to right, #FF99CC, #CC99FF);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    transition: background 0.3s ease-out;
+}
+
+.video-player input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #FFD700;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+}
+
+.video-player input[type="range"]:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+.video-player .time-text {
+    font-size: 0.75rem;
+    color: #FFFACD;
+    min-width: 40px;
+    text-align: center;
+}
+
+#toggleControls {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 8px;
+    background: linear-gradient(to br, from-purple-500/50, to-pink-500/50);
+    color: #FFFACD;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-out, transform 0.2s ease-out, box-shadow 0.3s ease-out;
+}
+
+#toggleControls:hover {
+    background: linear-gradient(to br, from-purple-600/50, to-pink-600/50);
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(255, 153, 204, 0.5);
+}
+
+.animate-orbit {
+    animation: orbit 10s linear infinite;
+}
+
+.animate-orbit-reverse {
+    animation: orbit-reverse 12s linear infinite;
+}
+
+@keyframes orbit {
+    0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+    100% { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+}
+
+@keyframes orbit-reverse {
+    0% { transform: rotate(0deg) translateX(20px) rotate(0deg); }
+    100% { transform: rotate(-360deg) translateX(20px) rotate(360deg); }
 }
 
 @keyframes pulse {
@@ -191,7 +309,7 @@ button#messageToggle:focus, button#launchButton:focus {
 }
 
 .animate-twinkle {
-    animation: twinkle 3.8s infinite ease-in-out; /* Smoother twinkle */
+    animation: twinkle 3.8s infinite ease-in-out;
 }
 
 .animate-twinkle.delay-1s {
@@ -216,7 +334,7 @@ button#messageToggle:focus, button#launchButton:focus {
         font-size: 2.75rem;
     }
 
-    h2 {
+    .edit-text {
         font-size: 1.75rem;
     }
 
@@ -237,5 +355,25 @@ button#messageToggle:focus, button#launchButton:focus {
 
     .hidden-message p, #launchMessage {
         font-size: 1.25rem;
+    }
+
+    .video-player .controls {
+        flex-direction: column;
+        padding: 6px;
+    }
+
+    .video-player input[type="range"] {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .video-player .time-text {
+        font-size: 0.65rem;
+    }
+
+    #toggleControls {
+        top: 4px;
+        right: 4px;
+        padding: 6px;
     }
 }
