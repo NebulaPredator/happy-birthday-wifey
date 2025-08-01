@@ -9,20 +9,83 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize particles.js with more particles and faster movement
     particlesJS('particles-js', {
         particles: {
-            number: { value: 100, density: { enable: true, value_area: 1200 } }, // Increased to 100
+            number: { value: 100, density: { enable: true, value_area: 1200 } },
             color: { value: ['#FF99CC', '#CC99FF', '#99CCFF', '#FFD700'] },
             shape: { type: 'star', stroke: { width: 0 } },
             opacity: { value: 0.5, random: true, anim: { enable: true, speed: 0.6, opacity_min: 0.2 } },
             size: { value: 3, random: true },
             line_linked: { enable: false },
-            move: { enable: true, speed: 1.5, direction: 'none', random: true } // Increased speed to 1.5
+            move: { enable: true, speed: 1.5, direction: 'none', random: true }
         },
         interactivity: {
             detect_on: 'canvas',
             events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } },
-            modes: { repulse: { distance: 250, duration: 0.4 }, push: { particles_nb: 4 } } // Enhanced interactivity
+            modes: { repulse: { distance: 250, duration: 0.4 }, push: { particles_nb: 4 } }
         }
     });
+
+    // Video player controls
+    const videoPlayer = document.getElementById('videoPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeControl = document.getElementById('volumeControl');
+    const progressBar = document.getElementById('progressBar');
+    const currentTime = document.getElementById('currentTime');
+    const duration = document.getElementById('duration');
+    const toggleControlsBtn = document.getElementById('toggleControls');
+    const videoControls = document.getElementById('videoControls');
+
+    // Hide/Show controls
+    let controlsVisible = true;
+    toggleControlsBtn.addEventListener('click', () => {
+        controlsVisible = !controlsVisible;
+        gsap.to(videoControls, {
+            opacity: controlsVisible ? 0 : 1,
+            duration: 0.3,
+            ease: 'power2.out',
+            onComplete: () => {
+                videoControls.style.display = controlsVisible ? 'none' : 'flex';
+            }
+        });
+        toggleControlsBtn.innerHTML = controlsVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-music"></i>';
+    });
+
+    // Play/Pause
+    playPauseBtn.addEventListener('click', () => {
+        if (videoPlayer.paused) {
+            videoPlayer.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            videoPlayer.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+    });
+
+    // Volume control
+    volumeControl.addEventListener('input', (e) => {
+        videoPlayer.volume = e.target.value;
+    });
+
+    // Progress bar
+    videoPlayer.addEventListener('timeupdate', () => {
+        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+        progressBar.value = progress;
+        currentTime.textContent = formatTime(videoPlayer.currentTime);
+        if (duration.textContent === '0:00' && !isNaN(videoPlayer.duration)) {
+            duration.textContent = formatTime(videoPlayer.duration);
+        }
+    });
+
+    progressBar.addEventListener('input', (e) => {
+        const time = (e.target.value / 100) * videoPlayer.duration;
+        videoPlayer.currentTime = time;
+    });
+
+    // Format time
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+    }
 
     // Message toggle with GSAP timeline
     const messageToggle = document.getElementById('messageToggle');
@@ -38,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isHidden) {
             tl.fromTo(hiddenMessage, 
                 { scale: 0.7, opacity: 0, y: 30 },
-                { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: 'expo.out' } // Smoother ease
+                { scale: 1, opacity: 1, y: 0, duration: 1.2, ease: 'expo.out' }
             );
             confetti({
                 particleCount: 60,
@@ -53,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 opacity: 0,
                 y: 30,
                 duration: 1.0,
-                ease: 'back.in(1.2)' // Smoother hide
+                ease: 'back.in(1.2)'
             });
         }
     });
@@ -108,17 +171,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 y: -20,
                 scale: 1.1,
                 duration: 0.5,
-                ease: 'back.out(1.7)' // Smoother lift-off
+                ease: 'back.out(1.7)'
             })
             .to(launchButton, {
                 y: -100,
                 opacity: 0,
                 duration: 1.5,
-                ease: 'expo.inOut' // Smoother ascent
+                ease: 'expo.inOut'
             })
             .fromTo(launchMessage, 
                 { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 1.3, ease: 'back.out(1.4)' }, '-=1.0' // Smoother reveal
+                { opacity: 1, y: 0, duration: 1.3, ease: 'back.out(1.4)' }, '-=1.0'
             )
             .fromTo('.celebration', 
                 { scale: 1, boxShadow: '0 16px 32px rgba(0, 0, 0, 0.2)' },
@@ -149,26 +212,26 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 0,
         y: 70,
         duration: 1.8,
-        ease: 'back.out(1.5)' // Smoother entry
+        ease: 'back.out(1.5)'
     })
     .from('h1', {
         opacity: 0,
         x: -70,
         duration: 2.0,
-        ease: 'back.out(1.6)', // Smoother slide
+        ease: 'back.out(1.6)',
         delay: 0.4
     }, '-=1.5')
     .from('.birthdate', {
         opacity: 0,
         scale: 0.8,
         duration: 1.5,
-        ease: 'back.out(1.4)', // Smoother scale
+        ease: 'back.out(1.4)',
         delay: 0.7
     }, '-=1.2')
     .from('.celebration', {
         opacity: 0,
         y: 50,
         duration: 1.5,
-        ease: 'back.out(1.5)' // Smoother rise
+        ease: 'back.out(1.5)'
     }, '-=1.0');
 });
