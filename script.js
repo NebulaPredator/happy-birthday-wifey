@@ -24,69 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Video player controls
-    const videoPlayer = document.getElementById('videoPlayer');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const volumeControl = document.getElementById('volumeControl');
-    const progressBar = document.getElementById('progressBar');
-    const currentTime = document.getElementById('currentTime');
-    const duration = document.getElementById('duration');
-    const toggleControlsBtn = document.getElementById('toggleControls');
-    const videoControls = document.getElementById('videoControls');
-
-    // Hide/Show controls
-    let controlsVisible = true;
-    toggleControlsBtn.addEventListener('click', () => {
-        controlsVisible = !controlsVisible;
-        gsap.to(videoControls, {
-            opacity: controlsVisible ? 0 : 1,
-            duration: 0.3,
-            ease: 'power2.out',
-            onComplete: () => {
-                videoControls.style.display = controlsVisible ? 'none' : 'flex';
-            }
-        });
-        toggleControlsBtn.innerHTML = controlsVisible ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-music"></i>';
-    });
-
-    // Play/Pause
-    playPauseBtn.addEventListener('click', () => {
-        if (videoPlayer.paused) {
-            videoPlayer.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
-            videoPlayer.pause();
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        }
-    });
-
-    // Volume control
-    volumeControl.addEventListener('input', (e) => {
-        videoPlayer.volume = e.target.value;
-    });
-
-    // Progress bar
-    videoPlayer.addEventListener('timeupdate', () => {
-        const progress = (videoPlayer.currentTime / videoPlayer.duration) * 100;
-        progressBar.value = progress;
-        currentTime.textContent = formatTime(videoPlayer.currentTime);
-        if (duration.textContent === '0:00' && !isNaN(videoPlayer.duration)) {
-            duration.textContent = formatTime(videoPlayer.duration);
-        }
-    });
-
-    progressBar.addEventListener('input', (e) => {
-        const time = (e.target.value / 100) * videoPlayer.duration;
-        videoPlayer.currentTime = time;
-    });
-
-    // Format time
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
-        return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
-    }
-
     // Message toggle with GSAP timeline
     const messageToggle = document.getElementById('messageToggle');
     const hiddenMessage = document.getElementById('hiddenMessage');
@@ -221,6 +158,13 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: 'back.out(1.6)',
         delay: 0.4
     }, '-=1.5')
+    .from('h2', {
+        opacity: 0,
+        scale: 0.8,
+        duration: 1.5,
+        ease: 'back.out(1.4)',
+        delay: 0.7
+    }, '-=1.2')
     .from('.birthdate', {
         opacity: 0,
         scale: 0.8,
