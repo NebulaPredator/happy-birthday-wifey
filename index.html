@@ -29,7 +29,34 @@
     </svg>
     <div class="container max-w-3xl mx-auto p-12 bg-white/10 rounded-3xl shadow-2xl text-center relative z-10 border border-purple-300/30 backdrop-blur-md" role="main" aria-labelledby="birthday-heading">
         <h1 id="birthday-heading" class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 mb-4">Happy Birthday, Laasya!</h1>
-        <h2 class="text-3xl text-yellow-100 mb-8 font-semibold tracking-wide">I Love You Alot Baby Girl</h2>
+        
+        <div class="video-section mb-10 relative">
+            <div class="edit-text text-2xl text-yellow-100 font-semibold tracking-wide mb-4">Laasya's Special Edit</div>
+            <div class="video-player relative rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-pink-100/20 to-purple-100/20 border border-pink-300/30">
+                <video id="videoPlayer" class="w-full h-auto rounded-lg" preload="metadata">
+                    <source src="sample-video.mp4" type="video/mp4">
+                    Your browser does not support the video element.
+                </video>
+                <div class="controls absolute bottom-0 w-full p-2 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-between rounded-b-xl transition-opacity duration-300 opacity-0" id="videoControls">
+                    <button id="playPauseBtn" class="text-white text-xl p-2 hover:text-yellow-200 transition-colors"><i class="fas fa-play"></i></button>
+                    <div class="flex items-center space-x-4">
+                        <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="1" class="w-20 h-1 bg-white/50 rounded-full appearance-none cursor-pointer accent-pink-400">
+                        <div id="currentTime" class="text-white text-xs">0:00</div>
+                        <input type="range" id="progressBar" min="0" max="100" value="0" class="w-full h-1 bg-white/50 rounded-full appearance-none cursor-pointer accent-purple-400">
+                        <div id="duration" class="text-white text-xs">0:00</div>
+                    </div>
+                </div>
+                <button id="toggleControls" class="absolute top-2 right-2 p-2 bg-gradient-to-br from-purple-500/50 to-pink-500/50 text-white rounded-full hover:from-purple-600/50 hover:to-pink-600/50 transition-all duration-300 shadow-md z-10"><i class="fas fa-music"></i></button>
+            </div>
+            <svg class="absolute -top-10 -left-10 w-32 h-32 text-yellow-200 opacity-50 animate-orbit" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="50" r="5" fill="currentColor"/>
+            </svg>
+            <svg class="absolute -bottom-10 -right-10 w-32 h-32 text-pink-300 opacity-50 animate-orbit-reverse" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2"/>
+                <circle cx="50" cy="50" r="5" fill="currentColor"/>
+            </svg>
+        </div>
         
         <div class="birthdate flex items-center justify-center gap-4 text-xl mb-10" aria-label="Birth date">
             <i class="fas fa-heart text-pink-400 text-2xl"></i>
@@ -42,7 +69,7 @@
         </button>
         
         <div class="hidden-message hidden p-8 bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-2xl text-purple-100 mb-10 transition-all duration-700 transform scale-0 border border-pink-300/30" id="hiddenMessage" role="region" aria-hidden="true">
-            <p class="text-xl font-medium">To my Dearest Laasya, I wish you the Happiest Birthday! May your day and your life be full of happiness, have a wonderful day Lassi ji!I Love You Alot!</p>
+            <p class="text-xl font-medium">To my Dearest Laasya, I wish you the Happiest Birthday! May your day and your life be full of happiness, have a wonderful day!</p>
         </div>
         
         <div class="celebration bg-purple-900/50 p-10 rounded-2xl border border-pink-300/20" aria-live="polite">
